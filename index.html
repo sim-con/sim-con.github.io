@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/f6fbd80a5e.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Noto+Sans+JP&family=Roboto&family=Shadows+Into+Light&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="icon" href="images/plant.png" />
+    <title>Simonne Contreras</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div id="navbar" class="row navbar">
+      <div class="col-xs-3 homemargin">
+        <button onclick="window.location.href='#'" class="homebutton">
+          Simonne Contreras
+        </button>
+      </div>
+      <div class="col-xs-9 iconsection">
+        <button
+          onclick="window.open('https://www.linkedin.com/in/simonnecontre/', '_blank')"
+          class="iconbuttons"
+        >
+          <span class="icon">
+            <i class="fab fa-linkedin-in"></i>
+          </span>
+        </button>
+        <button
+          onclick="location.href='mailto:sccontre@ucsd.edu'"
+          class="iconbuttons"
+        >
+          <span class="icon">
+            <i class="far fa-envelope"></i>
+          </span>
+        </button>
+        <button class="iconbuttons resume">
+          <span class="icon">
+            <i class="far fa-file-alt"></i>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Resume PDF -->
+    <div class="modal">
+      <div class="contentModal">
+        <embed src="images/resume.pdf" width="100%" height="100%" />
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <a href="#" class="pagination-circle"></a>
+      <div class="pagination-line"></div>
+      <a href="#Stripe" class="pagination-circle"></a>
+      <div class="pagination-line"></div>
+      <a href="#Nerdwallet2" class="pagination-circle"></a>
+      <div class="pagination-line"></div>
+      <a href="#Youtube" class="pagination-circle"></a>
+      <div class="pagination-line"></div>
+      <a href="#Nerdwallet" class="pagination-circle"></a>
+      <div class="pagination-line"></div>
+      <a href="#Twitter" class="pagination-circle"></a>
+      <div class="pagination-line"></div>
+      <a href="#UCSD" class="pagination-circle"></a>
+    </div>
+
+    <!-- Plant Button + About Me -->
+    <div class="plant-wrapper">
+      <img
+        src="images/plant.png"
+        alt="Plant doodle"
+        class="plant"
+      />
+    </div>
+    <div class="chatmodal">
+      <div class="modalContent">
+        <div class="modalHeader">
+          <div class="windowControls">
+            <button class="windowBtn windowBtn-close" aria-label="Close"></button>
+            <button class="windowBtn windowBtn-minimize" aria-label="Minimize"></button>
+            <button class="windowBtn windowBtn-maximize" aria-label="Maximize"></button>
+          </div>
+        </div>
+        <div class="modalBody">
+          <div class="modalBody-text">
+            <p> Hello, I'm Simonne! <span class="wave-emoji">👋</span></p>
+            <p> I'm a Frontend Software Engineer II at Stripe, where I work on the Link team.</p>
+            <p>Though I currently live in NYC, I'm from the <i>best</i> coast, where I obtained a UCSD Bachelor's Degree in Computer Science with a minor in Design.</p>
+            <p>In my free time, I enjoy discovering new music & going to concerts, spending time with my 3 cats, and exploring the city!</p>
+            <p>
+              Feel free to reach out to me on
+              <a
+                target="_blank"
+                href="https://www.linkedin.com/in/simonnecontre/"
+                >linkedin</a
+              >
+              or shoot me an email at
+              <a href="mailto:simonnecontreras1999@gmail.com">simonnecontreras1999@gmail.com!</a>
+            </p>
+          </div>
+          <div class="modalBody-placeholders">
+            <div class="modalBody-placeholder">
+              <img src="images/concerts.png" alt="Cats" class="modalBody-placeholder-image" />
+            </div>
+            <div class="modalBody-placeholder">
+              <img src="images/cats.png" alt="Concerts" class="modalBody-placeholder-image" />
+            </div>
+            <div class="modalBody-placeholder">
+              <img src="images/city.png" alt="City" class="modalBody-placeholder-image" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="">
+      <section id="">
+        <div class="section first" data-color="#9FCBB4">
+          <h1 class="name heading shimmer-text">Simonne Contreras</h1>
+          <h3 class="subtitle">FRONTEND SOFTWARE ENGINEER</h3>
+        </div>
+      </section>
+      <section id="Stripe">
+        <div class="section row" data-color="#90C0A7">
+          <div
+            class="col-lg-4 col-md-3 col-xs-12 d-flex justify-content-center"
+          >
+            <img src="images/stripe.png" alt="Stripe Logo" class="logo" />
+          </div>
+          <div
+            class="col-lg-8 col-md-9 col-xs-12 align-self-center text-md-right text-center"
+          >
+            <h3 class="job-title heading">Stripe</h3>
+            <h4 class="sub">Software Engineer II</h4>
+            <h5 class="smallsub">Jan 2025 - Current</h5>
+            <br />
+            <p>Instrumental in the large-scale redesign of Link UX within a high-traffic payment surface, partnering cross-functionally with product and design to deliver a flexible, extensible foundation enabling rapid iteration as supported payment methods expand.</p>
+            <p>Authored the technical design and led execution of a platform-enabling feature that unlocked extensibility for partner teams, mentoring a junior engineer through production delivery.</p>
+            <p>Serve as Observability DRI, scaling synthetic monitoring coverage 10x, stabilizing flaky tests, and increasing monitoring accuracy across critical payment flows.</p>
+            <p>Trusted team resource during on-call and run operations, rapidly triaging incidents, resolving production issues, and providing high context support to cross functional partners.</p>
+          </div>
+        </div>
+      </section>
+      <section id="Nerdwallet2">
+        <div class="section row" data-color="#81B499">
+          <div
+            class="col-lg-4 col-md-3 col-xs-12 d-flex justify-content-center"
+          >
+            <img
+              src="images/nerdwallet.png"
+              alt="Nerdwallet Logo"
+              class="logo"
+            />
+          </div>
+          <div
+            class="col-lg-8 col-md-9 col-xs-12 align-self-center text-md-right text-center"
+          >
+            <h3 class="job-title heading">Nerdwallet</h3>
+            <h4 class="sub">Software Engineer I & II</h4>
+            <h5 class="smallsub">Aug 2022 - Aug 2024</h5>
+            <br />
+            <p>Led and engineered numerous React + GraphQL projects utilizing multi-variant A/B testing to improve form completion by ~25% over two quarters.</p>
+            <p>Developed and shipped team's first mobile feature from end-to-end, collaborating closely with the mobile and business partner teams for a full quarter to bring a React Native telemetric discount program to life and unlock promising cross-platform revenue streams.</p>
+            <p>Collaborated directly with business partners and product team to create, test, and perfect robust API integrations in the GraphQL layer, enabling projects to ship to production with confidence.</p>
+          </div>
+        </div>
+      </section>
+      <section id="Youtube">
+        <div class="section row" data-color="#72A88B">
+          <div
+            class="col-lg-4 col-md-3 col-xs-12 d-flex justify-content-center"
+          >
+            <img src="images/youtube.png" alt="Youtube Logo" class="logo" />
+          </div>
+          <div
+            class="col-lg-8 col-md-9 col-xs-12 align-self-center text-md-right text-center"
+          >
+            <h3 class="job-title heading">Youtube</h3>
+            <h4 class="sub">Software Engineer Intern</h4>
+            <h5 class="smallsub">Aug 2021 - Dec 2021</h5>
+            <br />
+            <p>Coordinated and executed implementation of novel C++ and Javascript project on the YouTube TV platform, adding scalable and reliable serving and rendering logic to the codebase.</p>
+            <p>Followed detailed product design process to create thorough documentation around new feature and review its proposed implementation with senior-level engineers ahead of development.</p>
+          </div>
+        </div>
+      </section>
+      <section id="Nerdwallet">
+        <div class="section row" data-color="#62987B">
+          <div
+            class="col-lg-4 col-md-3 col-xs-12 d-flex justify-content-center"
+          >
+            <img
+              src="images/nerdwallet.png"
+              alt="Nerdwallet Logo"
+              class="logo"
+            />
+          </div>
+          <div
+            class="col-lg-8 col-md-9 col-xs-12 align-self-center text-center text-md-right"
+          >
+            <h3 class="job-title heading">Nerdwallet</h3>
+            <h4 class="sub">Software Engineer Intern</h4>
+            <h5 class="smallsub">Jun 2021 - Aug 2021</h5>
+            <br />
+            <p>Migrated outdated web application's repository to GraphQL and Typescript to improve SEO and CWV performance, offering up to $1M in expanded revenue opportunities for the year ahead.</p>
+            <p>Pioneered adoption of new React internal component design system and offered feedback to better the system ahead of company-wide adoption the following quarter.</p>
+          </div>
+        </div>
+      </section>
+      <section id="Twitter">
+        <div class="section row" data-color="#41775A">
+          <div
+            class="col-lg-4 col-md-3 col-xs-12 d-flex justify-content-center"
+          >
+            <img src="images/twitter.png" alt="Twitter Logo" class="logo" />
+          </div>
+          <div
+            class="col-lg-8 col-md-9 col-xs-12 align-self-center text-center text-md-right"
+          >
+            <h3 class="job-title heading">Twitter</h3>
+            <h4 class="sub">Software Engineer Intern</h4>
+            <h5 class="smallsub">Jun 2020 - Sep 2020</h5>
+            <br />
+            <p>Championed redesign of outdated internal forms using React, Scala, and Figma, elevating user experience for 100+ employees, preventing mass revenue loss, and ultimately enhancing advertiser trust in the brand.</p>
+            <p>Added response and validation logic in Scala, met with project managers frequently, drafted new UI features in Figma, and built out proposed UI features in React.</p>
+          </div>
+        </div>
+      </section>
+      <section id="UCSD">
+        <div class="section row" data-color="#21573A">
+          <div
+            class="col-lg-4 col-md-3 col-xs-12 d-flex justify-content-center"
+          >
+            <img src="images/ucsd.png" alt="UCSD Logo" class="logo" />
+          </div>
+          <div
+            class="col-lg-8 col-md-9 col-xs-12 align-self-center text-md-right text-center"
+          >
+            <h3 class="job-title heading">UCSD CSE Department</h3>
+            <h4 class="sub">Undergraduate Tutor</h4>
+            <h5 class="smallsub">Mar 2019 - Dec 2021</h5>
+            <br />
+            <p>
+              Assist students with course concepts regarding data structures and
+              software engineering tools in 3 lower division and 2 upper
+              division courses under instructors Gary Gillespie and Niema
+              Moshiri.
+            </p>
+            <p>
+              Provide students with targeted assistance during open lab hours.
+              This coursework consists of utilizing data structures to solve
+              theoretical problems and creating web and mobile applications from
+              scratch.
+            </p>
+            <p>
+              Prepare feedback on students' work as well as advice on best
+              debugging practices in order to create better and more mindful
+              programmers.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="index.js" charset="utf-8"></script>
+  </body>
+</html>
