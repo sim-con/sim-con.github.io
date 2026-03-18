@@ -34,7 +34,7 @@ let hasHoveredWindowButton = false;
 const AUTO_CLOSE_MS = 9000;
 
 function cancelModalShakeTimers() {
-  modalShakeTimerIds.forEach(id => clearTimeout(id));
+  modalShakeTimerIds.forEach((id) => clearTimeout(id));
   modalShakeTimerIds = [];
   chatmodalContent.classList.remove("modal-shake");
 }
@@ -72,13 +72,31 @@ function startAutoCloseTimer() {
 }
 
 function isDialogueClosing() {
-  return chatmodal.classList.contains("closing-yellow") || chatmodal.classList.contains("closing-fade") || chatmodal.classList.contains("closing-fade-fast");
+  return (
+    chatmodal.classList.contains("closing-yellow") ||
+    chatmodal.classList.contains("closing-fade") ||
+    chatmodal.classList.contains("closing-fade-fast") ||
+    chatmodal.classList.contains("closing-burst")
+  );
 }
 
-// Plant: hover or click opens modal when not open
+// Plant: hover or click opens modal when not open. Leaf spins on hover when modal is closed.
 plant.addEventListener("mouseenter", () => {
   if (!chatmodal.classList.contains("is-open") && !isDialogueClosing()) {
+    plant.classList.add("plant-hover-spin");
     opendialogue();
+  }
+});
+plant.addEventListener("mouseleave", () => {
+  if (
+    plant.classList.contains("plant-hover-spin") &&
+    !plant.classList.contains("dialogue-open")
+  ) {
+    const plantImg = plant.querySelector(".plant");
+    plantImg.style.transition = "none";
+    plant.classList.remove("plant-hover-spin");
+    plantImg.offsetHeight;
+    plantImg.style.transition = "";
   }
 });
 plant.addEventListener("click", () => {
@@ -90,25 +108,31 @@ plant.addEventListener("click", () => {
 // Modal closes only via 10s timer, yellow button, or red button — not on unhover
 
 // Window buttons: mark as hovered so modal shake is skipped this open cycle
-document.querySelectorAll(".windowBtn-close, .windowBtn-minimize, .windowBtn-maximize").forEach(btn => {
-  btn.addEventListener("mouseenter", () => { hasHoveredWindowButton = true; });
-});
+document
+  .querySelectorAll(
+    ".windowBtn-close, .windowBtn-minimize, .windowBtn-maximize"
+  )
+  .forEach((btn) => {
+    btn.addEventListener("mouseenter", () => {
+      hasHoveredWindowButton = true;
+    });
+  });
 
 // On click handler for circles to remove active pages
-allNodes.forEach(circle => {
-  circle.addEventListener("click", function(e) {
+allNodes.forEach((circle) => {
+  circle.addEventListener("click", function (e) {
     if (!circle.classList.contains("active-page")) {
-      for (var i=0; i < allNodes.length; i++) {
-        allNodes[i].classList.remove("active-page")
+      for (var i = 0; i < allNodes.length; i++) {
+        allNodes[i].classList.remove("active-page");
       }
     }
-  })
-})
+  });
+});
 
 function updateActiveSection() {
   for (var i = 0; i < sections.length; i++) {
     const bounding = sections[i].getBoundingClientRect();
-    const middle = bounding.top + (bounding.height / 2);
+    const middle = bounding.top + bounding.height / 2;
     if (
       middle >= 0 &&
       middle <= (2 * window.innerHeight) / 3 &&
@@ -165,22 +189,28 @@ window.addEventListener("pageshow", () => {
 });
 
 // On click handler for resume button
-resumeButton.onclick = function() {
+resumeButton.onclick = function () {
   modal.style.display = "block";
-}
+};
 
-// Red button: faster fade out (no shrink)
+// Red button: shake + poof/burst close
 document.querySelector(".windowBtn-close").addEventListener("click", (e) => {
   e.stopPropagation();
   cancelAutoCloseTimer();
   cancelModalShakeTimers();
-  closeDialogueWithFade({ shrink: false, fast: true });
+  closeDialogueWithFade({ shrink: false, fast: true, burst: true });
 });
 
 function closeDialogueWithFade(options = {}) {
-  const { shrink = false, fast = false } = options;
+  const { shrink = false, fast = false, burst = false } = options;
   chatmodal.classList.remove("instant-close");
-  const closeClass = shrink ? "closing-yellow" : fast ? "closing-fade-fast" : "closing-fade";
+  const closeClass = shrink
+    ? "closing-yellow"
+    : burst
+      ? "closing-burst"
+      : fast
+        ? "closing-fade-fast"
+        : "closing-fade";
 
   let cleanedUp = false;
   function cleanup() {
@@ -190,19 +220,39 @@ function closeDialogueWithFade(options = {}) {
       clearTimeout(closeFallbackTimeoutId);
       closeFallbackTimeoutId = null;
     }
-    chatmodal.classList.remove("closing-yellow", "closing-fade", "closing-fade-fast", "expanded", "modal-maximized", "opened");
+    chatmodal.classList.remove(
+      "closing-yellow",
+      "closing-fade",
+      "closing-fade-fast",
+      "closing-burst",
+      "expanded",
+      "modal-maximized",
+      "opened"
+    );
     chatmodal.classList.remove("is-open");
+    const plantImg = plant.querySelector(".plant");
+    plantImg.style.transition = "none";
+    plant.classList.remove("dialogue-open");
+    plantImg.offsetHeight;
+    plantImg.style.transition = "";
     cancelModalShakeTimers();
     hasHoveredWindowButton = false;
   }
 
   chatmodal.classList.add(closeClass);
 
-  const cleanupDelay = shrink ? 1100 : fast ? 500 : 1100;
+  const cleanupDelay = shrink ? 1100 : burst ? 700 : fast ? 500 : 1100;
   closeFallbackTimeoutId = setTimeout(cleanup, cleanupDelay);
 
   function onTransitionEnd(ev) {
-    if (shrink ? ev.propertyName !== "transform" : ev.propertyName !== "opacity") return;
+    if (
+      shrink
+        ? ev.propertyName !== "transform"
+        : burst
+          ? ev.target !== chatmodal
+          : ev.propertyName !== "opacity"
+    )
+      return;
     if (closeFallbackTimeoutId) {
       clearTimeout(closeFallbackTimeoutId);
       closeFallbackTimeoutId = null;
@@ -211,9 +261,13 @@ function closeDialogueWithFade(options = {}) {
   }
 
   if (shrink) {
-    chatmodalContent.addEventListener("transitionend", onTransitionEnd, { once: true });
+    chatmodalContent.addEventListener("transitionend", onTransitionEnd, {
+      once: true,
+    });
   } else {
-    chatmodal.addEventListener("transitionend", onTransitionEnd, { once: true });
+    chatmodal.addEventListener("transitionend", onTransitionEnd, {
+      once: true,
+    });
   }
 }
 
@@ -237,15 +291,19 @@ greenBtn.addEventListener("mouseleave", () => {
 });
 
 // Click out of resume modal to close it
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-}
+};
 
 // Click outside dialogue modal (on backdrop) or ESC — close same as red button
 chatmodal.addEventListener("click", (e) => {
-  if (e.target === chatmodal && chatmodal.classList.contains("is-open") && !isDialogueClosing()) {
+  if (
+    e.target === chatmodal &&
+    chatmodal.classList.contains("is-open") &&
+    !isDialogueClosing()
+  ) {
     cancelAutoCloseTimer();
     cancelModalShakeTimers();
     closeDialogueWithFade({ shrink: false, fast: true });
@@ -253,31 +311,41 @@ chatmodal.addEventListener("click", (e) => {
 });
 
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && chatmodal.classList.contains("is-open") && !isDialogueClosing()) {
+  if (
+    e.key === "Escape" &&
+    chatmodal.classList.contains("is-open") &&
+    !isDialogueClosing()
+  ) {
     cancelAutoCloseTimer();
     cancelModalShakeTimers();
     closeDialogueWithFade({ shrink: false, fast: true });
   }
 });
 
-// Open the about me modal: reverse of yellow close (scale up + fade in)
+// Open the about me modal (scale up + fade in)
 function opendialogue() {
-  // Cancel any in-flight close so it doesn't close us after we open
+  // Cancel any in-flight close
   if (closeFallbackTimeoutId) {
     clearTimeout(closeFallbackTimeoutId);
     closeFallbackTimeoutId = null;
   }
 
+  // Position modal's bottom right corner to the plant's top left corner
   const plantRect = plant.getBoundingClientRect();
-  const right = window.innerWidth - plantRect.left;
-  const bottom = window.innerHeight - plantRect.top;
-  chatmodal.style.setProperty("--dialogue-right", `${right}px`);
-  chatmodal.style.setProperty("--dialogue-bottom", `${bottom}px`);
+  chatmodal.style.setProperty(
+    "--dialogue-right",
+    `${window.innerWidth - plantRect.left}px`
+  );
+  chatmodal.style.setProperty(
+    "--dialogue-bottom",
+    `${window.innerHeight - plantRect.top}px`
+  );
 
   chatmodal.classList.remove("instant-close", "opened");
   chatmodal.classList.add("is-open");
   hasHoveredWindowButton = false;
   plant.classList.add("dialogue-open");
+  plant.classList.remove("plant-hover-spin");
   startAutoCloseTimer();
   scheduleModalShakes();
   // Delay so browser paints scale(0) before transitioning to scale(1)
